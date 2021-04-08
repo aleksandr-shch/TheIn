@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Events;
 
 use App\Organisation;
@@ -11,6 +13,9 @@ class OrganisationCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * @var Organisation
+     */
     public $organisation;
 
     /**

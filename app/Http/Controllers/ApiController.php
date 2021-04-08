@@ -51,7 +51,7 @@ class ApiController extends Controller
      */
     public function respond(): JsonResponse
     {
-        return \response()->json($this->body, $this->getStatusCode());
+        return response()->json($this->body, $this->getStatusCode());
     }
 
     /**
@@ -157,7 +157,7 @@ class ApiController extends Controller
     {
         $class = '\\App\\Transformers\\';
 
-        $class = $class . ucfirst($this->request->get('_controller')) . 'Transformer';
+        $class .= ucfirst($this->request->get('_controller')) . 'Transformer';
 
         $class = new $class();
 
@@ -200,11 +200,12 @@ class ApiController extends Controller
             ], true);
         }
 
-        return $this->appendBody('pagination', [
-            'total' => \count($data),
-            'per_page' => 0,
-            'current_page' => 1,
-            'last_page' => 1,
-        ], true);
+        return $this->appendBody('pagination',
+                                 [
+                                     'total' => count($data),
+                                     'per_page' => 0,
+                                     'current_page' => 1,
+                                     'last_page' => 1,
+                                 ], true);
     }
 }

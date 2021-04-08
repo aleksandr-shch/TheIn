@@ -17,7 +17,7 @@ use Illuminate\Http\JsonResponse;
 class OrganisationController extends ApiController
 {
     /**
-     * Create organization
+     * Create organisation
      *
      * @param CreateOrganisationRequest $request
      * @param OrganisationService $organisationService
@@ -26,17 +26,17 @@ class OrganisationController extends ApiController
      */
     public function store(CreateOrganisationRequest $request, OrganisationService $organisationService): JsonResponse
     {
-        $organization = $organisationService->createForOwner(
+        $organisation = $organisationService->createForOwner(
             $request->user(),
             $request->validated()
         );
 
-        return $this->transformItem('organization', $organization, ['owner'])
+        return $this->transformItem('organisation', $organisation, ['owner'])
             ->respond();
     }
 
     /**
-     * Get all organization
+     * Get all organisation
      *
      * @param OrganisationService $organisationService
      * @param OrganisationFilter $filter
@@ -45,9 +45,9 @@ class OrganisationController extends ApiController
      */
     public function index(OrganisationService $organisationService, OrganisationFilter $filter): JsonResponse
     {
-        $organizations = $organisationService->all($filter);
+        $organisations = $organisationService->all($filter);
 
-        return $this->transformCollection('organization',$organizations, ['owner'])
+        return $this->transformCollection('organisation', $organisations, ['owner'])
             ->respond();
     }
 }

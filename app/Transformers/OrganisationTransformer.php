@@ -24,13 +24,17 @@ class OrganisationTransformer extends TransformerAbstract
         'owner'
     ];
 
+    /**
+     * @param Carbon|null $date
+     * @return float|int|string|null
+     */
     protected function dateToUtcTimestamp(?Carbon $date)
     {
         if (is_null($date)) {
             return null;
         }
 
-        return  $date->utc()->timestamp;
+        return $date->utc()->timestamp;
     }
 
     /**

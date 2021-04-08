@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listeners;
 
 use App\Events\OrganisationCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class NotifyUserAboutNewOrganisation
 {
@@ -24,7 +24,7 @@ class NotifyUserAboutNewOrganisation
      * @param OrganisationCreated $event
      * @return void
      */
-    public function handle(OrganisationCreated $event)
+    public function handle(OrganisationCreated $event): void
     {
         $event->organisation->owner->notify(
             new \App\Notifications\OrganisationCreated($event->organisation)

@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Http\Filters;
 
@@ -15,11 +16,10 @@ abstract class Filter
     protected $request;
 
     /**
-     * Filter query
      * @param Builder $builder
-     * @return mixed
+     * @return void
      */
-    abstract protected function applyQuery(Builder $builder);
+    abstract protected function applyQuery(Builder $builder): void;
 
     /**
      * Filter query key
@@ -62,7 +62,7 @@ abstract class Filter
      * Apply filter
      * @param Builder $builder
      */
-    public function apply(Builder $builder)
+    public function apply(Builder $builder): void
     {
         if ($this->inRequest()) {
             $this->applyQuery($builder);

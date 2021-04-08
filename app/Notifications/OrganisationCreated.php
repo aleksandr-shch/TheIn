@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use App\Organisation;
@@ -11,6 +13,9 @@ class OrganisationCreated extends Notification
 {
     use Queueable;
 
+    /**
+     * @var Organisation
+     */
     protected $organisation;
 
     /**
@@ -29,7 +34,7 @@ class OrganisationCreated extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -37,14 +42,14 @@ class OrganisationCreated extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @param mixed $notifiable
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line("Organisation {$this->organisation->name} created.")
-                    ->line('Thank you for using our application!');
+            ->line("Organisation {$this->organisation->name} created.")
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -53,7 +58,7 @@ class OrganisationCreated extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray($notifiable): array
     {
         return [
             //

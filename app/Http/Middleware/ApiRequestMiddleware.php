@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Http\Request;
+
 use function count;
+use function is_string;
 
 /**
  * Class ApiRequestMiddleware
@@ -14,24 +17,26 @@ use function count;
 class ApiRequestMiddleware
 {
     /**
-     * @param Request  $request
-     * @param \Closure $next
+     * @param Request $request
+     * @param Closure $next
      *
      * @return mixed
      */
-    public function handle(Request $request, \Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if (\is_string($request->route()->action['uses'])) {
+        if (is_string($request->route()->action['uses'])) {
             $req = explode('\\', $request->route()->action['uses']);
 
             if ($req) {
                 $req = $req[count($req) - 1];
                 [$controller, $action] = explode('@', $req, 2);
 
-                $request->attributes->add([
-                    '_controller' => lcfirst(str_replace('Controller', '', $controller)),
-                    '_action' => lcfirst(str_replace('Action', '', $action)),
-                ]);
+                $request->attributes->add(
+                    [
+                        '_controller' => lcfirst(str_replace('Controller', '', $controller)),
+                        '_action' => lcfirst(str_replace('Action', '', $action)),
+                    ]
+                );
             }
         }
 

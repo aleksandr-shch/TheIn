@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Organisation;
-use App\User;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -35,13 +36,11 @@ class TestCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
-        //$user = User::find(7);
-        //dd($user->organizations);
-        $organization = Organisation::find(7);
-        dd($organization->owner);
+        $organisation = Organisation::find(7);
+        dd($organisation->owner);
     }
 }

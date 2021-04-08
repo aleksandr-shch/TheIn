@@ -17,24 +17,23 @@ use Illuminate\Database\Eloquent\Model;
 class OrganisationService
 {
     /**
-     * Create organization for owner
+     * Create organisation for owner
      * @param User $owner
      * @param array $attributes
      * @return Organisation|Model
      */
     public function createForOwner(User $owner, array $attributes): Organisation
     {
-        return $owner->organizations()->create($attributes);
+        return $owner->organisations()->create($attributes);
     }
 
     /**
-     * Get all organizations
+     * Get all organisations
      * @param OrganisationFilter|null $filter
      * @return Organisation[]|Collection
      */
     public function all(?OrganisationFilter $filter): Collection
     {
-        return Organisation::filter($filter)
-            ->get();
+        return Organisation::filter($filter)->get();
     }
 }

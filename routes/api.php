@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +16,16 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'AuthController@authenticate');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get(
+    '/user',
+    function (Request $request) {
+        return $request->user();
+    }
+);
 
-//Route::resource('organization', 'OrganisationController')
-//    ->only(['index', 'create']);
-
-Route::prefix('organisation')->group(function () {
-    Route::get('', 'OrganisationController@index');
-    Route::post('', 'OrganisationController@store')->middleware('auth:api');
-});
+Route::prefix('organisation')->group(
+    function () {
+        Route::get('', 'OrganisationController@index');
+        Route::post('', 'OrganisationController@store')->middleware('auth:api');
+    }
+);

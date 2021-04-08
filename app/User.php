@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Carbon\Carbon;
@@ -53,10 +55,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * Organizations relation
+     * Organisations relation
      * @return HasMany
      */
-    public function organizations(): HasMany
+    public function organisations(): HasMany
     {
         return $this->hasMany(Organisation::class, 'owner_user_id');
     }
