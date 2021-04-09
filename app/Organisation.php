@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string name
  * @property int owner_user_id
  * @property Carbon trial_end
+ * @property int|null trial_end_timestamp
  * @property bool subscribed
  * @property Carbon created_at
  * @property Carbon updated_at
@@ -55,10 +56,46 @@ class Organisation extends Model
     ];
 
     /**
+     * Boot model
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function(self $organisation) {
+
+            if (!isset($organisation->attributes['trial_end'])) {
+                // Set default trial_end
+                $organisation->startTrialPeriod(
+                    config('organisation.trial_period_days')
+                );
+            }
+        });
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTrialEndTimestampAttribute(): ?int
+    {
+        return optional($this->trial_end)->timestamp;
+    }
+
+    /**
      * @return BelongsTo
      */
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_user_id');
+    }
+
+    /**
+     * Start trial period
+     *
+     * @param int $days
+     */
+    public function startTrialPeriod(int $days)
+    {
+        $this->trial_end = now()->addDays($days);
     }
 }

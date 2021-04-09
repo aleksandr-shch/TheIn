@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Transformers;
 
 use App\Organisation;
-use Carbon\Carbon;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 
@@ -21,21 +20,8 @@ class OrganisationTransformer extends TransformerAbstract
      * @var array
      */
     protected $availableIncludes = [
-        'owner'
+        'owner',
     ];
-
-    /**
-     * @param Carbon|null $date
-     * @return float|int|string|null
-     */
-    protected function dateToUtcTimestamp(?Carbon $date)
-    {
-        if (is_null($date)) {
-            return null;
-        }
-
-        return $date->utc()->timestamp;
-    }
 
     /**
      * @param Organisation $organisation
@@ -48,7 +34,7 @@ class OrganisationTransformer extends TransformerAbstract
             'id' => $organisation->id,
             'name' => $organisation->name,
             'subscribed' => $organisation->subscribed,
-            'trial_end' => $this->dateToUtcTimestamp($organisation->trial_end)
+            'trial_end' => $organisation->trial_end_timestamp,
         ];
     }
 

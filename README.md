@@ -1,3 +1,31 @@
+# Installation
+
+Copy environment file
+```
+cp .env.example .env
+```
+
+Install dependencies
+```
+composer install
+```
+
+Run database in docker if you need
+```
+docker-compose up -d db
+```
+
+Install application
+```
+php artisan app:install
+```
+
+Serve the application on the PHP development server
+```
+php artisan serve
+```
+Profit!
+
 # Backend code test
 
 Get started by initialising the project as you would normally.

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Mail;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,7 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(UsersTableSeeder::class);
+        // Disable sending mail when database seeds run
+        Mail::fake();
+
         $this->call(DemoSeeder::class);
     }
 }
