@@ -25,7 +25,7 @@ abstract class Filter
      * Filter query key
      * @return string
      */
-    abstract public function key():string;
+    abstract public function key(): string;
 
     /**
      * Check request contains filter

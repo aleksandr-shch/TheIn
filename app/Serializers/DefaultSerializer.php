@@ -14,7 +14,7 @@ class DefaultSerializer extends ArraySerializer
 {
     /**
      * @param string $resourceKey
-     * @param array  $data
+     * @param array $data
      *
      * @return array
      */

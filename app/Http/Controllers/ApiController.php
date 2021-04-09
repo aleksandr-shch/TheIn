@@ -99,11 +99,11 @@ class ApiController extends Controller
     public function appendError(string $message): self
     {
         return $this->appendBody('error', $message)
-                    ->setStatusCode(Response::HTTP_FORBIDDEN);
+            ->setStatusCode(Response::HTTP_FORBIDDEN);
     }
 
     /**
-     * @param string            $key
+     * @param string $key
      * @param                   $data
      * @param array|string|null $includes
      *
@@ -123,7 +123,7 @@ class ApiController extends Controller
     }
 
     /**
-     * @param string            $key
+     * @param string $key
      * @param                   $data
      * @param array|string|null $includes
      *
@@ -192,20 +192,27 @@ class ApiController extends Controller
     public function withPagination($data): self
     {
         if (method_exists($data, 'total')) {
-            return $this->appendBody('pagination', [
-                'total' => (int)$data->total(),
-                'per_page' => (int)$data->perPage(),
-                'current_page' => (int)$data->currentPage(),
-                'last_page' => (int)$data->lastPage(),
-            ], true);
+            return $this->appendBody(
+                'pagination',
+                [
+                    'total' => (int)$data->total(),
+                    'per_page' => (int)$data->perPage(),
+                    'current_page' => (int)$data->currentPage(),
+                    'last_page' => (int)$data->lastPage(),
+                ],
+                true
+            );
         }
 
-        return $this->appendBody('pagination',
-                                 [
-                                     'total' => count($data),
-                                     'per_page' => 0,
-                                     'current_page' => 1,
-                                     'last_page' => 1,
-                                 ], true);
+        return $this->appendBody(
+            'pagination',
+            [
+                'total' => count($data),
+                'per_page' => 0,
+                'current_page' => 1,
+                'last_page' => 1,
+            ],
+            true
+        );
     }
 }

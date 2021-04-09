@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Organisation
  *
- * @property int         id
+ * @property int id
  * @property string name
  * @property int owner_user_id
  * @property Carbon trial_end
