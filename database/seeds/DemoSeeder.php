@@ -1,5 +1,7 @@
 <?php
 
+use App\Organisation;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DemoSeeder extends Seeder
@@ -9,13 +11,17 @@ class DemoSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(\App\User::class, 10)
-            ->create()->each(static function (\App\User $user) {
-                factory(\App\Organisation::class)->create([
-                    'owner_user_id' => $user->id,
-                ]);
-            });
+        factory(User::class, 10)
+            ->create()->each(
+                static function (User $user) {
+                    factory(Organisation::class)->create(
+                        [
+                            'owner_user_id' => $user->id,
+                        ]
+                    );
+                }
+            );
     }
 }

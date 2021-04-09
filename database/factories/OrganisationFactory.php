@@ -8,12 +8,15 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 
-$factory->define(Organisation::class, function (Faker $faker) {
-    $subbed = random_int(0, 1);
+$factory->define(
+    Organisation::class,
+    function (Faker $faker) {
+        $subbed = random_int(0, 1);
 
-    return [
-        'name' => $faker->company,
-        'subscribed' => $subbed,
-        'trial_end' => !$subbed ? Carbon::now()->addDays(30) : null,
-    ];
-});
+        return [
+            'name' => $faker->company,
+            'subscribed' => $subbed,
+            'trial_end' => !$subbed ? Carbon::now()->addDays(30) : null,
+        ];
+    }
+);
