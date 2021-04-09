@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Filters;
 
-use App\Http\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 
 class OrganisationFilter extends Filter

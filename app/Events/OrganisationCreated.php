@@ -11,7 +11,9 @@ use Illuminate\Queue\SerializesModels;
 
 class OrganisationCreated
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     /**
      * @var Organisation

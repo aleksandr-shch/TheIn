@@ -47,7 +47,7 @@ class OrganisationCreated extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line("Organisation {$this->organisation->name} created.")
             ->line('Thank you for using our application!');
     }

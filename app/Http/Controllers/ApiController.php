@@ -77,7 +77,7 @@ class ApiController extends Controller
     /**
      * @param string $key
      * @param        $data
-     *
+     * @param bool $mainObject
      * @return ApiController
      */
     public function appendBody(string $key, $data, $mainObject = false): self
